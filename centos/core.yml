@@ -1,0 +1,38 @@
+---
+- name: Install developer tools and packages from EPEL on CentOS Stream 10
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Ensure system is up to date
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+        update_cache: yes
+
+    - name: Enable CodeReady Builder (CRB) repository
+      ansible.builtin.command: dnf config-manager --set-enabled crb
+      args:
+        warn: false
+
+    - name: Install EPEL repository
+      ansible.builtin.dnf:
+        name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm"
+        state: present
+
+    - name: Install Development Tools group (with optional packages) and utilities
+      ansible.builtin.dnf:
+        name:
+          - "@Development tools"
+          - btop
+          - fd-find
+          # - git # not needed, as it already in Dev tools group
+          - ripgrep
+          - bat
+          - fzf
+          - neovim
+          - tmux
+
+        state: present
+        install_weak_deps: yes
+
