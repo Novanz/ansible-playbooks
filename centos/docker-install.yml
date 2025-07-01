@@ -1,6 +1,6 @@
 ---
 - name: Install Docker on CentOS 10
-  hosts: all
+  hosts: localhost
   become: yes
 
   tasks:
