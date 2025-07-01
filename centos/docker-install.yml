@@ -24,6 +24,9 @@
           - docker-compose-plugin
         state: present
 
+    - name: Reload systemd daemon
+      command: systemctl daemon-reload 
+
     - name: Enable and start Docker service
       systemd:
         name: docker
