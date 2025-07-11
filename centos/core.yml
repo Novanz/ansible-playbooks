@@ -32,6 +32,7 @@
           - fzf
           - neovim
           - tmux
+          - zoxide
 
         state: present
         install_weak_deps: yes

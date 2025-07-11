@@ -10,6 +10,7 @@
 - tmux
 - ripgrep
 - git 
+- zoxide
 
 ## other core-tools
 
