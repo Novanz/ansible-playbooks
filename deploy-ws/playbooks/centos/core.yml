@@ -1,14 +1,16 @@
 ---
 - name: Install developer tools and packages from EPEL on CentOS Stream 10
   hosts: all
-  become: yes
+  become: true
 
   tasks:
     - name: Ensure system is up to date
       ansible.builtin.dnf:
         name: "*"
         state: latest
-        update_cache: yes
+        update_cache: true
+      tags:
+        - skip_ansible_lint
 
     - name: Enable CodeReady Builder (CRB) repository
       ansible.builtin.command: dnf config-manager --set-enabled crb
@@ -35,5 +37,4 @@
           - zoxide
 
         state: present
-        install_weak_deps: yes
-
+        install_weak_deps: true
